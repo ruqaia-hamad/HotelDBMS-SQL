@@ -17,7 +17,6 @@ public class Hotels {
     static String pass = "root";
 	 public static void creatingHotelsTable(){
 
-	        
 	        String sql = "CREATE TABLE Hotels " +
                     "(id INTEGER PRIMARY KEY, " +
                     " hotel_name VARCHAR(255) NOT NULL, " +
@@ -41,7 +40,7 @@ public class Hotels {
 
 	            // Executing query
 	            int m = st.executeUpdate(sql);
-	            if (m >  0)
+	            if (m <=  0)
 	                System.out.println("Created successfully : " + sql);
 	            else
 	                System.out.println("creating table failed");
@@ -252,27 +251,42 @@ public class Hotels {
 	}}
 		    
 	
+		    public static void makeIsActiveFalseById(int id) throws Throwable{
+		        Connection con = null;
+		        PreparedStatement stmt = null;
 
-		        public static void makeIsActiveFalseById()throws Throwable {
-		            String updateSql = "UPDATE Hotels SET is_active = 0 WHERE id <= 10";
-		        	    Connection con = null;
+		        try {
+		        	 Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+			        
+			            DriverManager.registerDriver(driver);
+
+		        	   con = DriverManager.getConnection(url, user,
+			                    pass);
+
+		   
+		            String sql = "UPDATE Hotels SET is_Active = false WHERE id = ?";
+		            stmt = con.prepareStatement(sql);
+		            stmt.setInt(1, id);
+
+		            stmt.executeUpdate();
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        } finally {
+		     
 		            try {
-		            	 Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-				            // Registering drivers
-				            DriverManager.registerDriver(driver);
-
-				            // Reference to connection interface
-				            con = DriverManager.getConnection(url, user,
-				                    pass);
-		            	  Statement stmt = con.createStatement();
-		                 
-		                    int rowCount = stmt.executeUpdate(updateSql);
-
-		                      System.out.println(rowCount + " rows were updated.");
-		            } catch (SQLException ex) {
-		                ex.printStackTrace();
+		                if (stmt != null) {
+		                    stmt.close();
+		                }
+		                if (con != null) {
+		                    con.close();
+		                }
+		            } catch (SQLException e) {
+		                e.printStackTrace();
 		            }
-		        
+		        }
+		    }
+
+		       
 		    }
 
 		    
@@ -280,7 +294,6 @@ public class Hotels {
 		    
 			    
 		    	
-		    	}
 
 
 
