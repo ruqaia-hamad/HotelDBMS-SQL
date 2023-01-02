@@ -19,12 +19,19 @@ public class Employees {
 		 		+ " employee_type_id INTEGER FOREIGN KEY REFERENCES Employee_Type(id),"
 		 		+ " room_id INTEGER FOREIGN KEY REFERENCES Rooms(id),"
 		 		+ " created_date DATE NOT NULL,"
-		 		+ " updated_date DATE, is_Active BOOLEAN NOT NULL)";
+		 		+ " updated_date DATE, is_Active BIT NOT NULL)";
 
 	        Connection con = null;
 
 	        // Try block to check for exceptions
 	        try {
+	        	   Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+		            // Registering drivers
+		            DriverManager.registerDriver(driver);
+
+		            // Reference to connection interface
+		            con = DriverManager.getConnection(url, user,
+		                    pass);
 	            Statement st = con.createStatement();
 
 	            // Executing query

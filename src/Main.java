@@ -11,6 +11,10 @@ public class Main {
 		System.out.println(" =====================================");
 		System.out.println("|  [1]HOTELS SUB MENU                 |");
 		System.out.println("|  [2]ROOMS SUB MENU                  |");
+		System.out.println("|  [2]GUESTS SUB MENU                 |");
+		System.out.println("|  [2]EMPLOYEES SUB MENU              |");
+		System.out.println("|  [2]ROOM TYPE SUB MENU              |");
+		System.out.println("|  [2]EMPLOYEES TYPE SUB MENU         |");
 		System.out.println("|  [10]EXIT                           |");
 		System.out.println(" =====================================");
 		Integer num=sc.nextInt();
@@ -32,6 +36,7 @@ public class Main {
 			switch (op) {
 			case 1:
 				Hotels.creatingHotelsTable();
+
 				break;
 			case 2:
 				Hotels.InsertIntoTable(10000);
