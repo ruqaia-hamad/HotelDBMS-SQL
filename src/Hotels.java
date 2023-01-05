@@ -16,8 +16,8 @@ public class Hotels {
 	static String pass = "root";
 
 	public static void creatingHotelsTable() {
-
-		String sql = "CREATE TABLE Hotels " + "(id INTEGER PRIMARY KEY, " + " hotel_name VARCHAR(255) NOT NULL, "
+	
+		String sql = "CREATE TABLE Hotels " + "(id INTEGER PRIMARY KEY IDENTITY(1,1), " + " hotel_name VARCHAR(255) NOT NULL, "
 				+ " hotel_location VARCHAR(255), " + " created_date DATE NOT NULL, " + " updated_date DATE, "
 				+ " is_Active BIT NOT NULL)";
 
@@ -40,7 +40,7 @@ public class Hotels {
 			else
 				System.out.println("creating table failed");
 
-			// Closing the connections
+
 			con.close();
 		}
 
@@ -52,7 +52,7 @@ public class Hotels {
 
 	public static void InsertIntoTable(int numOfRows) {
 
-		String sql = "INSERT INTO Hotels (id, hotel_name, hotel_location,created_date,updated_date,is_Active) VALUES (?, ?, ?,?, ?, ?)";
+		String sql = "INSERT INTO Hotels (hotel_name, hotel_location,created_date,updated_date,is_Active) VALUES ( ?, ?,?, ?, ?)";
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -70,14 +70,12 @@ public class Hotels {
 				String stringToAdd = "Ruqaia" + numberToAdd;
 				boolean boolToAdd = true;
 
-				pstmt.setInt(1, numberToAdd);
+		
+				pstmt.setString(1, stringToAdd);
 				pstmt.setString(2, stringToAdd);
-				pstmt.setString(3, stringToAdd);
-				pstmt.setDate(4, new Date(System.currentTimeMillis()));
-				pstmt.setDate(5,
-
-						new Date(System.currentTimeMillis()));
-				pstmt.setBoolean(6, boolToAdd);
+				pstmt.setDate(3, new Date(System.currentTimeMillis()));
+				pstmt.setDate(4,new Date(System.currentTimeMillis()));
+				pstmt.setBoolean(5, boolToAdd);
 				pstmt.executeUpdate();
 			}
 
@@ -264,5 +262,47 @@ public class Hotels {
 			}
 		}
 	}
+	public static void InsertIntoTable() {
+for(int i=0; i<=100;i++) {
+		String sql = "INSERT INTO Hotels (hotel_name, hotel_location, created_date, updated_date, is_Active)\r\n"
+				+ "VALUES ('Hilton', 'New York', '2022-01-01', '2022-01-01', 1),\r\n"
+			       +"('Marriott', 'Los Angeles', '2022-01-01', '2022-01-01', 1),\r\n"
+			      +" ('Sheraton', 'Chicago', '2022-01-01', '2022-01-01', 1),\r\n"
+			    +"('Hyatt', 'San Francisco', '2022-01-01', '2022-01-01', 1),\r\n"
+			     +" ('InterContinental', 'Miami', '2022-01-01', '2022-01-01', 1),\r\n"
+			    +" ('Ritz-Carlton', 'Boston', '2022-01-01', '2022-01-01', 1),\r\n"
+			     +  "('Four Seasons', 'Washington D.C.', '2022-01-01', '2022-01-01', 1),\r\n"
+			     +  "('W', 'Dallas', '2022-01-01', '2022-01-01', 1),"
+			      + "('Westin', 'Denver', '2022-01-01', '2022-01-01', 1),"
+			      + "('St. Regis', 'Seattle', '2022-01-01', '2022-01-01', 1)";
 
+		Connection con = null;
+
+		try {
+
+			Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+			// Registering drivers
+			DriverManager.registerDriver(driver);
+
+			// Reference to connection interface
+			con = DriverManager.getConnection(url, user, pass);
+			Statement st = con.createStatement();
+
+			// Executing query
+			int m = st.executeUpdate(sql);
+			if (m >1)
+				System.out.println("Inserted successfully : " + sql);
+			else
+				System.out.println("Inserting failed");
+
+			// Closing the connections
+			con.close();
+		}
+
+		catch (Exception ex) {
+
+			System.err.println(ex);
+		}}
+	}
+	
 }

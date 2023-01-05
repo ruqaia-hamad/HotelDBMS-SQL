@@ -14,10 +14,9 @@ public class Guests {
 
 	static String user = "sa";
 	static String pass = "root";
+    public static void creatingGuestsTable() {
 
-	public static void creatingGuestsTable() {
-
-		String sql = "CREATE TABLE Guests (" + "id INTEGER PRIMARY KEY," + "guest_name VARCHAR(255) NOT NULL,"
+		String sql = "CREATE TABLE Guests (" + "id INTEGER PRIMARY KEY IDENTITY(1,1)," + "guest_name VARCHAR(255) NOT NULL,"
 				+ "guest_phone VARCHAR(255) NOT NULL," + "guest_accompanying_members INTEGER NOT NULL,"
 				+ "guest_payment_amount INTEGER NOT NULL," + "room_id INTEGER FOREIGN KEY REFERENCES Rooms(id),"
 				+ "hotel_id INTEGER FOREIGN KEY REFERENCES Hotels(id)," + "created_date DATE NOT NULL,"
@@ -50,10 +49,49 @@ public class Guests {
 			System.err.println(ex);
 		}
 	}
+    public static void InsertIntoTable() {
+    	
+    	for(int m=0;m<=1000;m++) {
+      
+		String sql = "INSERT INTO Guests (guest_name,guest_phone ,guest_accompanying_members,guest_payment_amount,room_id,hotel_id,created_date,updated_date,is_Active) \r\n"
+				+ "VALUES ('MUNA', '9677456',5,200,5,5,'2022-01-01', '2022-01-01', 1),\r\n"
+				+ "       ('NORA', '9677452',2,1000,2,2,'2022-02-02', '2022-02-02', 1),\r\n"
+				+ "      ('EMEE', '9675432',3,400,3,3,'2022-03-03', '2022-03-03', 1),\r\n"
+				+ "       ('SALE', '9577452',4,1200,4,4,'2022-04-04', '2022-04-04', 1),\r\n"
+				+ "      ('LAMA', '9377432',9,700,5,5,'2022-05-05', '2022-05-05', 1),\r\n"
+				+ "       ('SUHA', '9277452',19,2000,6,6,'2022-02-06', '2022-02-06', 1),\r\n"
+				+ "      ('MARIYA', '9677432',23,800,7,7,'2022-03-07', '2022-03-07', 1),\r\n"
+				+ "      ('AHMED', '9977432',4,700,8,8,'2022-04-08', '2022-04-08', 1)\r\n";
+		Connection con = null;
 
+		try {
+
+			Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+			// Registering drivers
+			DriverManager.registerDriver(driver);
+
+			// Reference to connection interface
+			con = DriverManager.getConnection(url, user, pass);
+			Statement st = con.createStatement();
+
+			// Executing query
+			int n = st.executeUpdate(sql);
+			if (n >1)
+				System.out.println("Inserted successfully : " + sql);
+			else
+				System.out.println("Inserting failed");
+
+			// Closing the connections
+			con.close();
+		}
+
+		catch (Exception ex) {
+
+			System.err.println(ex);
+		}}}
 	public static void InsertIntoTable(int numOfRows) {
 
-		String sql = "INSERT INTO Guests (id, guest_name,guest_phone ,guest_accompanying_members,guest_payment_amount,room_id,hotel_id,created_date,updated_date,is_Active) VALUES (?, ?, ?,?, ?, ?,?,?,?,?)";
+		String sql = "INSERT INTO Guests (guest_name,guest_phone ,guest_accompanying_members,guest_payment_amount,room_id,hotel_id,created_date,updated_date,is_Active) VALUES (?, ?,?, ?, ?,?,?,?,?)";
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -71,16 +109,15 @@ public class Guests {
 				String stringToAdd = "Ruqaia" + numberToAdd;
 				boolean boolToAdd = true;
 
-				pstmt.setInt(1, numberToAdd);
+				pstmt.setString(1, stringToAdd);
 				pstmt.setString(2, stringToAdd);
-				pstmt.setString(3, stringToAdd);
+				pstmt.setInt(3, numberToAdd);
 				pstmt.setInt(4, numberToAdd);
 				pstmt.setInt(5, numberToAdd);
 				pstmt.setInt(6, numberToAdd);
-				pstmt.setInt(7, numberToAdd);
+				pstmt.setDate(7, new Date(System.currentTimeMillis()));
 				pstmt.setDate(8, new Date(System.currentTimeMillis()));
-				pstmt.setDate(9, new Date(System.currentTimeMillis()));
-				pstmt.setBoolean(10, boolToAdd);
+				pstmt.setBoolean(9, boolToAdd);
 				pstmt.executeUpdate();
 			}
 
@@ -111,7 +148,7 @@ public class Guests {
 			while (rs.next() && count < numOfRows) {
 				Integer id = rs.getInt("id");
 				String guestName = rs.getString("guest_name");
-				Integer guestPhone = rs.getInt("guest_phone");
+				String guestPhone = rs.getString("guest_phone");
 				Integer accompanyingMembers = rs.getInt("guest_accompanying_members");
 				Integer paymentAmount = rs.getInt("guest_payment_amount");
 				Integer roomId = rs.getInt("room_id");

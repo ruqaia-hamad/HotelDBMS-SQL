@@ -17,7 +17,7 @@ public class EmployeeType {
 
 	public static void creatingEmployeeTypeTable() {
 
-		String sql = "CREATE TABLE Employee_Type " + "(id INTEGER PRIMARY KEY, " + "employee_type_name TEXT NOT NULL, "
+		String sql = "CREATE TABLE Employee_Type " + "(id INTEGER PRIMARY KEY IDENTITY(1,1), " + "employee_type_name Varchar(225) NOT NULL, "
 				+ " created_date DATE NOT NULL, " + " updated_date DATE, " + "is_active BIT NOT NULL) ";
 
 		Connection con = null;
@@ -50,40 +50,43 @@ public class EmployeeType {
 		}
 	}
 
-	public static void InsertIntoTable(int numOfRows) {
 
-		String sql = "INSERT INTO Employees (id,employee_type_name,created_date,updated_date,is_Active) VALUES (?, ?, ?,?, ?)";
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		Scanner sc = new Scanner(System.in);
 
-		try {
-			Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-			// Registering drivers
-			DriverManager.registerDriver(driver);
+		public static void InsertIntoTable() {
 
-			// Reference to connection interface
-			con = DriverManager.getConnection(url, user, pass);
-			pstmt = con.prepareStatement(sql);
-			for (int i = 0; i < numOfRows; i++) {
-				Random rn = new Random();
-				int numberToAdd = rn.nextInt(100);
-				String stringToAdd = "Ruqaia" + numberToAdd;
-				boolean is_Active = true;
+			String sql = "INSERT INTO Employee_Type (employee_type_name,created_date,updated_date,is_Active)\r\n"
+					+ "VALUES ('MANAGER', '2022-01-01', '2022-01-01', 1),\r\n"
+					+ "       ('ATTENDANT', '2022-01-02', '2022-01-02', 1),\r\n"
+					+ "       ('VALET', '2022-01-03', '2022-01-03', 1),\r\n"
+					+ "       ('BUTLER', '2022-01-04', '2022-01-04', 1),\r\n"
+					+ "       ('DIRECTOR', '2022-01-05', '2022-01-05', 1)";
+			Connection con = null;
 
-				pstmt.setInt(1, numberToAdd);
-				pstmt.setString(2, stringToAdd);
-				pstmt.setDate(3, new Date(System.currentTimeMillis()));
-				pstmt.setDate(4, new Date(System.currentTimeMillis()));
-				pstmt.setBoolean(5, is_Active);
-				pstmt.executeUpdate();
+			try {
+
+				Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+				// Registering drivers
+				DriverManager.registerDriver(driver);
+
+				// Reference to connection interface
+				con = DriverManager.getConnection(url, user, pass);
+				Statement st = con.createStatement();
+
+				// Executing query
+				int m = st.executeUpdate(sql);
+				if (m >1)
+					System.out.println("Inserted successfully : " + sql);
+				else
+					System.out.println("Inserting failed");
+
+				// Closing the connections
+				con.close();
 			}
 
-			System.out.println(numOfRows + " rows inserted successfully!");
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	}
+			catch (Exception ex) {
+
+				System.err.println(ex);
+			}}
 
 	public static void readFromTable(int numOfRows) {
 

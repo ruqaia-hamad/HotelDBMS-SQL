@@ -17,6 +17,7 @@ public class Main {
 			System.out.println("|  [4]EMPLOYEES SUB MENU              |");
 			System.out.println("|  [5]EMPLOYEES TYPE SUB MENU         |");
 			System.out.println("|  [6]ROOM TYPE SUB MENU              |");
+			System.out.println("|  [7]HOTEL MANAGMENT                 |");
 			System.out.println("|  [7]EXIT                            |");
 			System.out.println(" =====================================");
 			Integer num = sc.nextInt();
@@ -47,14 +48,14 @@ public class Main {
 						Hotels.InsertIntoTable(10000);
 						break;
 					case 3:
-
+			
 						Hotels.InsertIntoTable(1);
 						break;
 					case 4:
 						Hotels.readFromTable(10);
 						break;
 					case 5:
-						Hotels.makeIsActiveFalseById(12);
+						Hotels.makeIsActiveFalseById(10);
 						break;
 
 					case 6:
@@ -64,6 +65,7 @@ public class Main {
 						break;
 					case 7:
 						isExitMenu = false;
+						isExitMenu3=true;
 					}
 				} while (isExitMenu);
 
@@ -76,12 +78,12 @@ public class Main {
 					System.out.println("Please Choose Number From Menu:               \n");
 					System.out.println(" ==============================================");
 					System.out.println("|  [1]CREATE ROOMS   TABLE                     |");
-					System.out.println("|  [2]Insert 10,000 ROOM                       |");
-					System.out.println("|  [3]Insert 1 ROOM                            |");
-					System.out.println("|  [4]Print 10 ROOMS                           |");
-					System.out.println("|  [5]Make first 10 ROOMS  'is_Active' = false |");
-					System.out.println("|  [6]Print ROOMS information by user input    |");
-					System.out.println("|  [7]EXIT                                     |");
+					System.out.println("|  [2]Insert  ROOM                             |");
+				
+					System.out.println("|  [3]Print 10 ROOMS                           |");
+					System.out.println("|  [4]Make first 10 ROOMS  'is_Active' = false |");
+					System.out.println("|  [5]Print ROOMS information by user input    |");
+					System.out.println("|  [6]EXIT                                     |");
 					System.out.println(" ==============================================");
 					int op2 = sc.nextInt();
 
@@ -90,25 +92,22 @@ public class Main {
 						Rooms.creatingRoomsTable();
 						break;
 					case 2:
-						Rooms.InsertIntoTable(10000);
+						Rooms.InsertIntoTable();
 						break;
+					
 					case 3:
-
-						Rooms.InsertIntoTable(1);
-						break;
-					case 4:
 						Rooms.readFromTable(10);
 						break;
-					case 5:
+					case 4:
 						Rooms.makeIsActiveFalseById(12);
 						break;
 
-					case 6:
+					case 5:
 						System.out.print("Enter the number of hotel information you want ");
 						int numOfRows = sc.nextInt();
 						Hotels.readFromTable(numOfRows);
 						break;
-					case 7:
+					case 6:
 						isExitMenu4 = false;
 					}
 				} while (isExitMenu4);
@@ -122,12 +121,11 @@ public class Main {
 					System.out.println("Please Choose Number From Menu:               \n");
 					System.out.println(" ==============================================");
 					System.out.println("|  [1]CREATE GUESTS TABLE                      |");
-					System.out.println("|  [2]Insert 10,000 GUESTS                     |");
-					System.out.println("|  [3]Insert 1 GUEST                           |");
-					System.out.println("|  [4]Print 10 GUESTS                          |");
-					System.out.println("|  [5]Make first 10 GUESTS 'is_Active' = false |");
-					System.out.println("|  [6]Print GUESTS information by user input   |");
-					System.out.println("|  [7]EXIT                                     |");
+					System.out.println("|  [2]Insert  GUESTS                           |");
+					System.out.println("|  [3]Print 10 GUESTS                          |");
+					System.out.println("|  [4]Make first 10 GUESTS 'is_Active' = false |");
+					System.out.println("|  [5]Print GUESTS information by user input   |");
+					System.out.println("|  [6]EXIT                                     |");
 					System.out.println(" ==============================================");
 					int op = sc.nextInt();
 
@@ -136,26 +134,24 @@ public class Main {
 						Guests.creatingGuestsTable();
 
 						break;
+				
 					case 2:
-						Guests.InsertIntoTable(10000);
+
+						Guests.InsertIntoTable();
 						break;
 					case 3:
-
-						Guests.InsertIntoTable(1);
-						break;
-					case 4:
 						Guests.readFromTable(10);
 						break;
-					case 5:
+					case 4:
 						Guests.makeIsActiveFalseById(12);
 						break;
 
-					case 6:
+					case 5:
 						System.out.print("Enter the number of Guests information you want ");
 						int numOfRows = sc.nextInt();
 						Hotels.readFromTable(numOfRows);
 						break;
-					case 7:
+					case 6:
 						isExitMenu5 = false;
 					}
 				} while (isExitMenu5);
@@ -169,8 +165,8 @@ public class Main {
 					System.out.println("Please Choose Number From Menu:               \n");
 					System.out.println(" ==============================================");
 					System.out.println("|  [1]CREATE Employees TABLE                      |");
-					System.out.println("|  [2]Insert 10,000 Employees                     |");
-					System.out.println("|  [3]Insert 1 Employees                          |");
+					System.out.println("|  [2]Insert        Employees                     |");
+					
 					System.out.println("|  [4]Print 10 Employees                          |");
 					System.out.println("|  [5]Make first 10 Employees 'is_Active' = false |");
 					System.out.println("|  [6]Print Employees information by user input   |");
@@ -184,25 +180,22 @@ public class Main {
 
 						break;
 					case 2:
-						Employees.InsertIntoTable(10000);
+						Employees.InsertIntoTable();
 						break;
+				
 					case 3:
-
-						Employees.InsertIntoTable(1);
-						break;
-					case 4:
 						Employees.readFromTable(10);
 						break;
-					case 5:
+					case 4:
 						Employees.makeIsActiveFalseById(10);
 						break;
 
-					case 6:
+					case 5:
 						System.out.print("Enter the number of Employees information you want ");
 						int numOfRows = sc.nextInt();
 						Hotels.readFromTable(numOfRows);
 						break;
-					case 7:
+					case 6:
 						isExitMenu6 = false;
 					}
 				} while (isExitMenu6);
@@ -216,12 +209,11 @@ public class Main {
 					System.out.println("Please Choose Number From Menu:                      \n");
 					System.out.println(" =====================================================");
 					System.out.println("|  [1]CREATE Employee Type TABLE                      |");
-					System.out.println("|  [2]Insert 10,000 Employee Type                     |");
-					System.out.println("|  [3]Insert 1 Employee Type                          |");
-					System.out.println("|  [4]Print 10 Employee Type                          |");
-					System.out.println("|  [5]Make first 10 Employee Type'is_Active' = false  |");
-					System.out.println("|  [6]Print Employee Type information by user input   |");
-					System.out.println("|  [7]EXIT                                            |");
+					System.out.println("|  [2]Insert 5 Employee Type                          |");
+					System.out.println("|  [3]Print 10 Employee Type                          |");
+					System.out.println("|  [4]Make first 10 Employee Type'is_Active' = false  |");
+					System.out.println("|  [5]Print Employee Type information by user input   |");
+					System.out.println("|  [6]EXIT                                            |");
 					System.out.println(" =====================================================");
 					int op = sc.nextInt();
 
@@ -230,26 +222,24 @@ public class Main {
 						EmployeeType.creatingEmployeeTypeTable();
 
 						break;
+				
 					case 2:
-						EmployeeType.InsertIntoTable(10000);
+
+						EmployeeType.InsertIntoTable();
 						break;
 					case 3:
-
-						EmployeeType.InsertIntoTable(1);
-						break;
-					case 4:
 						EmployeeType.readFromTable(10);
 						break;
-					case 5:
+					case 4:
 						EmployeeType.makeIsActiveFalseById(10);
 						break;
 
-					case 6:
+					case 5:
 						System.out.print("Enter the number of Employee type information you want ");
 						int numOfRows = sc.nextInt();
 						EmployeeType.readFromTable(numOfRows);
 						break;
-					case 7:
+					case 6:
 						isExitMenu7 = false;
 					}
 				} while (isExitMenu7);
@@ -261,15 +251,14 @@ public class Main {
 				do {
  
 					System.out.println("Please Choose Number From Menu:                      \n");
-					System.out.println(" =====================================================");
+					System.out.println(" =================================================");
 					System.out.println("|  [1]CREATE Room Type TABLE                      |");
-					System.out.println("|  [2]Insert 10,000 Room Type                    |");
-					System.out.println("|  [3]Insert 1 Room Type                        |");
-					System.out.println("|  [4]Print 10 Room Type                         |");
-					System.out.println("|  [5]Make first 10 Room Type'is_Active' = false  |");
-					System.out.println("|  [6]Print Room Type information by user input   |");
-					System.out.println("|  [7]EXIT                                            |");
-					System.out.println(" =====================================================");
+					System.out.println("|  [2]Insert 3 Rooms Type                         |");
+					System.out.println("|  [3]Print 10 Room Type                          |");
+					System.out.println("|  [4]Make first 10 Room Type'is_Active' = false  |");
+					System.out.println("|  [5]Print Room Type information by user input   |");
+					System.out.println("|  [6]EXIT                                        |");
+					System.out.println(" =================================================");
 					int op = sc.nextInt();
 
 					switch (op) {
@@ -278,32 +267,68 @@ public class Main {
 
 						break;
 					case 2:
-						RoomType.InsertIntoTable(10000);
+						RoomType.InsertIntoTable();
 						break;
+				
 					case 3:
-
-						RoomType.InsertIntoTable(1);
-						break;
-					case 4:
 						RoomType.readFromTable(10);
 						break;
-					case 5:
+					case 4:
 						RoomType.makeIsActiveFalseById(10);
 						break;
 
-					case 6:
+					case 5:
 						System.out.print("Enter the number of Room type information you want ");
 						int numOfRows = sc.nextInt();
 						RoomType.readFromTable(numOfRows);
 						break;
-					case 7:
+					case 6:
 						isExitMenu8 = false;
 					}
 				} while (isExitMenu8);
 
 				break;
-	
 			case 7:
+				boolean isExitMenu9 = true;
+				do {
+
+					System.out.println("Please Choose Number From Menu:               \n");
+					System.out.println(" ==============================================");
+					System.out.println("|  [1]Guests who's name end with 'E'                  |");
+					System.out.println("|  [2]Rooms where guests are paying more than 1000    |");           
+					System.out.println("|  [3]Count of guests who are staing in 'DELUXE' rooms|");
+					System.out.println("|  [4]Make first 10 GUESTS 'is_Active' = false        |");
+					System.out.println("|  [5]Print GUESTS information by user input          |");
+					System.out.println("|  [6]EXIT                                            |");
+					System.out.println(" ==============================================");
+					int op = sc.nextInt();
+
+					switch (op) {
+					case 1:
+		 		HotelManagement.checkGuestNameEdingWithE();
+
+						break;
+				
+					case 2:
+
+						HotelManagement.roomPaying();
+						break;
+					case 3:
+						HotelManagement.countGuest();
+					case 4:
+					
+						break;
+
+					case 5:
+						
+						break;
+					case 6:
+						isExitMenu9 = false;
+					}
+				} while (isExitMenu9);
+
+				break;
+			case 8:
 				System.out.println("THANK YOU");
 				isExitMenu = false;
 				break;

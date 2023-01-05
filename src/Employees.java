@@ -18,10 +18,8 @@ public class Employees {
     static String user = "sa";
     static String pass = "root";
 	 public static void creatingEmployeeTable(){
-
-		 
-	        
-		 String sql = "CREATE TABLE Employees (id INTEGER PRIMARY KEY,"
+	
+		 String sql = "CREATE TABLE Employees (id INTEGER PRIMARY KEY IDENTITY(1,1),"
 		 		+ " employee_type_id INTEGER FOREIGN KEY REFERENCES Employee_Type(id),"
 		 		+ " room_id INTEGER FOREIGN KEY REFERENCES Rooms(id),"
 		 		+ " created_date DATE NOT NULL,"
@@ -43,7 +41,7 @@ public class Employees {
 
 	            // Executing query
 	            int m = st.executeUpdate(sql);
-	            if (m >  0)
+	            if (m <= 0)
 	                System.out.println("Created successfully : " + sql);
 	            else
 	                System.out.println("creating table failed");
@@ -59,13 +57,50 @@ public class Employees {
 	        }
 	    }
 	 
+	  public static void InsertIntoTable() {
+	    	
+	    	for(int m=0;m<=200;m++) {
+	      
+			String sql = "INSERT INTO Employees (employee_type_id,room_id,created_date,updated_date,is_Active)  \r\n"
+					+ "VALUES (2, 5,'2022-01-01', '2022-01-01', 1),\r\n"
+					+ "       (4, 6,'2022-02-02', '2022-02-02', 1),\r\n"
+					+ "      (5, 7,'2022-03-03', '2022-03-03', 1),\r\n"
+					+ "       (6, 8,'2022-04-04', '2022-04-04', 1),\r\n"
+					+ "      (7, 9,'2022-05-05', '2022-05-05', 1),\r\n"
+					+ "       (8,13,'2022-02-06', '2022-02-06', 1),\r\n"
+					+ "      (9,11,'2022-03-07', '2022-03-07', 1),\r\n"
+					+ "      (10,41,'2022-04-08', '2022-04-08', 1)\r\n";
+			Connection con = null;
 
+			try {
+
+				Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+				// Registering drivers
+				DriverManager.registerDriver(driver);
+
+				// Reference to connection interface
+				con = DriverManager.getConnection(url, user, pass);
+				Statement st = con.createStatement();
+
+				// Executing query
+				int n = st.executeUpdate(sql);
+				if (n >1)
+					System.out.println("Inserted successfully : " + sql);
+				else
+					System.out.println("Inserting failed");
+
+				// Closing the connections
+				con.close();
+			}
+
+			catch (Exception ex) {
+
+				System.err.println(ex);
+			}}}
 		public static void InsertIntoTable(int numOfRows) {
 			
 			
-	
-
-			String sql = "INSERT INTO Employees (id,employee_type_id,room_id,created_date,updated_date,is_Active) VALUES (?, ?, ?,?, ?,?)";
+			String sql = "INSERT INTO Employees (employee_type_id,room_id,created_date,updated_date,is_Active) VALUES ( ?, ?,?, ?,?)";
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			Scanner sc = new Scanner(System.in);
@@ -84,12 +119,12 @@ public class Employees {
 					String stringToAdd = "Ruqaia" + numberToAdd;
 			        boolean is_Active=true;
 
+				
 					pstmt.setInt(1, numberToAdd);
 					pstmt.setInt(2, numberToAdd);
-					pstmt.setInt(3, numberToAdd);
+					pstmt.setDate(3, new Date(System.currentTimeMillis()));
 					pstmt.setDate(4, new Date(System.currentTimeMillis()));
-					pstmt.setDate(5, new Date(System.currentTimeMillis()));
-					pstmt.setBoolean(6, is_Active);
+					pstmt.setBoolean(5, is_Active);
 					pstmt.executeUpdate();
 				}
 
