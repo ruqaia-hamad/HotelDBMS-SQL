@@ -55,6 +55,7 @@ public class RoomType {
 		String sql = "INSERT INTO Room_Type (room_type_name, created_date, updated_date, is_Active)\r\n"
 				+ "VALUES ('STANDARD', '2022-01-01', '2022-01-01', 1),\r\n"
 				+ "       ('DELUXE', '2022-01-02', '2022-01-02', 1),\r\n"
+				+ "       ('DELUXE', '2022-01-02', '2022-01-02', 1),\r\n"
 				+ "       ('SUITE', '2022-01-03', '2022-01-03', 1);";
 		Connection con = null;
 

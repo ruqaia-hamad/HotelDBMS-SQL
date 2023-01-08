@@ -18,7 +18,7 @@ public class Main {
 			System.out.println("|  [5]EMPLOYEES TYPE SUB MENU         |");
 			System.out.println("|  [6]ROOM TYPE SUB MENU              |");
 			System.out.println("|  [7]HOTEL MANAGMENT                 |");
-			System.out.println("|  [7]EXIT                            |");
+			System.out.println("|  [8]EXIT                            |");
 			System.out.println(" =====================================");
 			Integer num = sc.nextInt();
 
@@ -48,7 +48,7 @@ public class Main {
 						Hotels.InsertIntoTable(10000);
 						break;
 					case 3:
-			
+
 						Hotels.InsertIntoTable(1);
 						break;
 					case 4:
@@ -65,7 +65,8 @@ public class Main {
 						break;
 					case 7:
 						isExitMenu = false;
-						isExitMenu3=true;
+						isExitMenu3 = true;
+						break;
 					}
 				} while (isExitMenu);
 
@@ -79,7 +80,7 @@ public class Main {
 					System.out.println(" ==============================================");
 					System.out.println("|  [1]CREATE ROOMS   TABLE                     |");
 					System.out.println("|  [2]Insert  ROOM                             |");
-				
+
 					System.out.println("|  [3]Print 10 ROOMS                           |");
 					System.out.println("|  [4]Make first 10 ROOMS  'is_Active' = false |");
 					System.out.println("|  [5]Print ROOMS information by user input    |");
@@ -94,7 +95,7 @@ public class Main {
 					case 2:
 						Rooms.InsertIntoTable();
 						break;
-					
+
 					case 3:
 						Rooms.readFromTable(10);
 						break;
@@ -109,6 +110,7 @@ public class Main {
 						break;
 					case 6:
 						isExitMenu4 = false;
+						break;
 					}
 				} while (isExitMenu4);
 
@@ -134,7 +136,7 @@ public class Main {
 						Guests.creatingGuestsTable();
 
 						break;
-				
+
 					case 2:
 
 						Guests.InsertIntoTable();
@@ -153,6 +155,7 @@ public class Main {
 						break;
 					case 6:
 						isExitMenu5 = false;
+						break;
 					}
 				} while (isExitMenu5);
 
@@ -166,7 +169,7 @@ public class Main {
 					System.out.println(" ==============================================");
 					System.out.println("|  [1]CREATE Employees TABLE                      |");
 					System.out.println("|  [2]Insert        Employees                     |");
-					
+
 					System.out.println("|  [4]Print 10 Employees                          |");
 					System.out.println("|  [5]Make first 10 Employees 'is_Active' = false |");
 					System.out.println("|  [6]Print Employees information by user input   |");
@@ -182,7 +185,7 @@ public class Main {
 					case 2:
 						Employees.InsertIntoTable();
 						break;
-				
+
 					case 3:
 						Employees.readFromTable(10);
 						break;
@@ -197,6 +200,7 @@ public class Main {
 						break;
 					case 6:
 						isExitMenu6 = false;
+						break;
 					}
 				} while (isExitMenu6);
 
@@ -205,7 +209,7 @@ public class Main {
 			case 5:
 				boolean isExitMenu7 = true;
 				do {
- 
+
 					System.out.println("Please Choose Number From Menu:                      \n");
 					System.out.println(" =====================================================");
 					System.out.println("|  [1]CREATE Employee Type TABLE                      |");
@@ -222,7 +226,7 @@ public class Main {
 						EmployeeType.creatingEmployeeTypeTable();
 
 						break;
-				
+
 					case 2:
 
 						EmployeeType.InsertIntoTable();
@@ -241,6 +245,7 @@ public class Main {
 						break;
 					case 6:
 						isExitMenu7 = false;
+						break;
 					}
 				} while (isExitMenu7);
 
@@ -249,7 +254,7 @@ public class Main {
 			case 6:
 				boolean isExitMenu8 = true;
 				do {
- 
+
 					System.out.println("Please Choose Number From Menu:                      \n");
 					System.out.println(" =================================================");
 					System.out.println("|  [1]CREATE Room Type TABLE                      |");
@@ -269,7 +274,7 @@ public class Main {
 					case 2:
 						RoomType.InsertIntoTable();
 						break;
-				
+
 					case 3:
 						RoomType.readFromTable(10);
 						break;
@@ -284,6 +289,7 @@ public class Main {
 						break;
 					case 6:
 						isExitMenu8 = false;
+						break;
 					}
 				} while (isExitMenu8);
 
@@ -293,22 +299,23 @@ public class Main {
 				do {
 
 					System.out.println("Please Choose Number From Menu:               \n");
-					System.out.println(" ==============================================");
-					System.out.println("|  [1]Guests who's name end with 'E'                  |");
-					System.out.println("|  [2]Rooms where guests are paying more than 1000    |");           
-					System.out.println("|  [3]Count of guests who are staing in 'DELUXE' rooms|");
-					System.out.println("|  [4]Make first 10 GUESTS 'is_Active' = false        |");
-					System.out.println("|  [5]Print GUESTS information by user input          |");
-					System.out.println("|  [6]EXIT                                            |");
-					System.out.println(" ==============================================");
+					System.out.println(" ==============================================================");
+					System.out.println("|  [1]Guests who's name end with 'E'                           |");
+					System.out.println("|  [2]Rooms where guests are paying more than 1000             |");
+					System.out.println("|  [3]Count of guests who are staing in 'DELUXE' rooms         |");
+					System.out.println("|  [4]Guests who are served by employee who's name have 'A'    |");
+					System.out.println("|  [5]Rooms which are not active but room type is 'Deluxe'     |");
+					System.out.println("|  [6]All room type who's name have 'H' or are active >5 rooms |");
+					System.out.println("|  [7]EXIT                                                     |");
+					System.out.println(" ==============================================================");
 					int op = sc.nextInt();
 
 					switch (op) {
 					case 1:
-		 		HotelManagement.checkGuestNameEdingWithE();
+						HotelManagement.checkGuestNameEdingWithE();
 
 						break;
-				
+
 					case 2:
 
 						HotelManagement.roomPaying();
@@ -316,14 +323,19 @@ public class Main {
 					case 3:
 						HotelManagement.countGuest();
 					case 4:
-					
+						HotelManagement.employeeStartWithA();
 						break;
 
 					case 5:
-						
+						HotelManagement.allRooms();
 						break;
 					case 6:
+						HotelManagement.roomTypeName();
+						break;
+					case 7:
+
 						isExitMenu9 = false;
+						break;
 					}
 				} while (isExitMenu9);
 
@@ -335,7 +347,7 @@ public class Main {
 
 			}
 
-		}while(isExitMenu3=false);
+		} while (isExitMenu3 = false);
 
 	}
 
