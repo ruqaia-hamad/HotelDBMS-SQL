@@ -5,7 +5,7 @@ public class Main {
 	public static void main(String[] args) throws Throwable {
 		Scanner sc = new Scanner(System.in);
 		boolean isExitMenu3 = true;
-		do {
+		while (isExitMenu3) {
 			System.out.println("\t\t++++++++++++++++++++++++++++++++++");
 			System.out.println("\t\t+ WELCOME TO THE SYSTEM          +");
 			System.out.println("\t\t++++++++++++++++++++++++++++++++++\n");
@@ -25,7 +25,7 @@ public class Main {
 			switch (num) {
 			case 1:
 				boolean isExitMenu = true;
-				do {
+				while (isExitMenu) {
 
 					System.out.println("Please Choose Number From Menu:               \n");
 					System.out.println(" ==============================================");
@@ -65,16 +65,19 @@ public class Main {
 						break;
 					case 7:
 						isExitMenu = false;
-						isExitMenu3 = true;
+
 						break;
 					}
-				} while (isExitMenu);
+
+				}
+
+				isExitMenu3 = true;
 
 				break;
 
 			case 2:
 				boolean isExitMenu4 = true;
-				do {
+				while (isExitMenu4) {
 
 					System.out.println("Please Choose Number From Menu:               \n");
 					System.out.println(" ==============================================");
@@ -112,14 +115,15 @@ public class Main {
 						isExitMenu4 = false;
 						break;
 					}
-				} while (isExitMenu4);
+				}
+
+				isExitMenu3 = true;
 
 				break;
 			case 3:
 
 				boolean isExitMenu5 = true;
-				do {
-
+				while (isExitMenu5) {
 					System.out.println("Please Choose Number From Menu:               \n");
 					System.out.println(" ==============================================");
 					System.out.println("|  [1]CREATE GUESTS TABLE                      |");
@@ -157,14 +161,13 @@ public class Main {
 						isExitMenu5 = false;
 						break;
 					}
-				} while (isExitMenu5);
-
+				}
+				isExitMenu3 = true;
 				break;
 
 			case 4:
 				boolean isExitMenu6 = true;
-				do {
-
+				while (isExitMenu6) {
 					System.out.println("Please Choose Number From Menu:               \n");
 					System.out.println(" ==============================================");
 					System.out.println("|  [1]CREATE Employees TABLE                      |");
@@ -202,13 +205,13 @@ public class Main {
 						isExitMenu6 = false;
 						break;
 					}
-				} while (isExitMenu6);
-
+				}
+				isExitMenu3 = true;
 				break;
 
 			case 5:
 				boolean isExitMenu7 = true;
-				do {
+				while (isExitMenu7) {
 
 					System.out.println("Please Choose Number From Menu:                      \n");
 					System.out.println(" =====================================================");
@@ -247,13 +250,13 @@ public class Main {
 						isExitMenu7 = false;
 						break;
 					}
-				} while (isExitMenu7);
-
+				}
+				isExitMenu3 = true;
 				break;
 
 			case 6:
 				boolean isExitMenu8 = true;
-				do {
+				while (isExitMenu8) {
 
 					System.out.println("Please Choose Number From Menu:                      \n");
 					System.out.println(" =================================================");
@@ -291,13 +294,12 @@ public class Main {
 						isExitMenu8 = false;
 						break;
 					}
-				} while (isExitMenu8);
-
+				}
+				isExitMenu3 = true;
 				break;
 			case 7:
 				boolean isExitMenu9 = true;
-				do {
-
+				while (isExitMenu9) {
 					System.out.println("Please Choose Number From Menu:               \n");
 					System.out.println(" ==============================================================");
 					System.out.println("|  [1]Guests who's name end with 'E'                           |");
@@ -337,8 +339,9 @@ public class Main {
 						isExitMenu9 = false;
 						break;
 					}
-				} while (isExitMenu9);
 
+				}
+				isExitMenu3 = true;
 				break;
 			case 8:
 				System.out.println("THANK YOU");
@@ -347,7 +350,7 @@ public class Main {
 
 			}
 
-		} while (isExitMenu3 = false);
+		}
 
 	}
 
