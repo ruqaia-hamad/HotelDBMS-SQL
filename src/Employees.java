@@ -47,50 +47,38 @@ public class Employees {
 
 		catch (Exception ex) {
 
-			System.err.println(ex);
+			System.out.println(ex);
 		}
 	}
 
-	public static void InsertIntoTable() {
+	public static void InsertIntoTable() throws Throwable {
 
-		for (int m = 0; m <= 200; m++) {
+		String sql = "INSERT INTO Employees (employee_type_id,room_id,created_date,updated_date,is_Active) VALUES (?, ?, ?, ?,?)";
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Employee type id:");
+		int employee_type_id = sc.nextInt();
 
-			String sql = "INSERT INTO Employees (employee_type_id,room_id,created_date,updated_date,is_Active)  \r\n"
-					+ "VALUES (2, 5,'2022-01-01', '2022-01-01', 1),\r\n"
-					+ "       (4, 6,'2022-02-02', '2022-02-02', 1),\r\n"
-					+ "      (5, 7,'2022-03-03', '2022-03-03', 1),\r\n"
-					+ "       (6, 8,'2022-04-04', '2022-04-04', 1),\r\n"
-					+ "      (7, 9,'2022-05-05', '2022-05-05', 1),\r\n"
-					+ "       (8,13,'2022-02-06', '2022-02-06', 1),\r\n"
-					+ "      (9,11,'2022-03-07', '2022-03-07', 1),\r\n"
-					+ "      (10,41,'2022-04-08', '2022-04-08', 1)\r\n";
-			Connection con = null;
+		System.out.println("Enter Room id:");
+		int room_id = sc.nextInt();
 
-			try {
+		try {
+			Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+			DriverManager.registerDriver(driver);
+			boolean boolToAdd = true;
+			con = DriverManager.getConnection(url, user, pass);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, employee_type_id);
+			pstmt.setInt(2, room_id);
+			pstmt.setDate(3, new Date(System.currentTimeMillis()));
+			pstmt.setDate(4, null);
+			pstmt.setBoolean(5, boolToAdd);
+			pstmt.executeUpdate();
 
-				Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-				// Registering drivers
-				DriverManager.registerDriver(driver);
-
-				// Reference to connection interface
-				con = DriverManager.getConnection(url, user, pass);
-				Statement st = con.createStatement();
-
-				// Executing query
-				int n = st.executeUpdate(sql);
-				if (n > 1)
-					System.out.println("Inserted successfully : " + sql);
-				else
-					System.out.println("Inserting failed");
-
-				// Closing the connections
-				con.close();
-			}
-
-			catch (Exception ex) {
-
-				System.err.println(ex);
-			}
+			System.out.println(" rows inserted successfully!");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 	}
 

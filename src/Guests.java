@@ -14,11 +14,13 @@ public class Guests {
 
 	static String user = "sa";
 	static String pass = "root";
-    public static void creatingGuestsTable() {
 
-		String sql = "CREATE TABLE Guests (" + "id INTEGER PRIMARY KEY IDENTITY(1,1)," + "guest_name VARCHAR(255) NOT NULL,"
-				+ "guest_phone VARCHAR(255) NOT NULL," + "guest_accompanying_members INTEGER NOT NULL,"
-				+ "guest_payment_amount INTEGER NOT NULL," + "room_id INTEGER FOREIGN KEY REFERENCES Rooms(id),"
+	public static void creatingGuestsTable() {
+
+		String sql = "CREATE TABLE Guests (" + "id INTEGER PRIMARY KEY IDENTITY(1,1),"
+				+ "guest_name VARCHAR(255) NOT NULL," + "guest_phone VARCHAR(255) NOT NULL,"
+				+ "guest_accompanying_members INTEGER NOT NULL," + "guest_payment_amount INTEGER NOT NULL,"
+				+ "room_id INTEGER FOREIGN KEY REFERENCES Rooms(id),"
 				+ "hotel_id INTEGER FOREIGN KEY REFERENCES Hotels(id)," + "created_date DATE NOT NULL,"
 				+ "updated_date DATE," + "is_Active BIT NOT NULL" + ")";
 		Connection con = null;
@@ -49,46 +51,54 @@ public class Guests {
 			System.err.println(ex);
 		}
 	}
-    public static void InsertIntoTable() {
-    	
-    	for(int m=0;m<=1000;m++) {
-      
-		String sql = "INSERT INTO Guests (guest_name,guest_phone ,guest_accompanying_members,guest_payment_amount,room_id,hotel_id,created_date,updated_date,is_Active) \r\n"
-				+ "VALUES ('MUNA', '9677456',5,200,5,5,'2022-01-01', '2022-01-01', 1),\r\n"
-				+ "       ('NORA', '9677452',2,1000,2,2,'2022-02-02', '2022-02-02', 1),\r\n"
-				+ "      ('EMEE', '9675432',3,400,3,3,'2022-03-03', '2022-03-03', 1),\r\n"
-				+ "       ('SALE', '9577452',4,1200,4,4,'2022-04-04', '2022-04-04', 1),\r\n"
-				+ "      ('LAMA', '9377432',9,700,5,5,'2022-05-05', '2022-05-05', 1),\r\n"
-				+ "       ('SUHA', '9277452',19,2000,6,6,'2022-02-06', '2022-02-06', 1),\r\n"
-				+ "      ('MARIYA', '9677432',23,800,7,7,'2022-03-07', '2022-03-07', 1),\r\n"
-				+ "      ('AHMED', '9977432',4,700,8,8,'2022-04-08', '2022-04-08', 1)\r\n";
+
+	public static void InsertIntoTable() throws Throwable {
+
+		String sql = "INSERT INTO Guests(guest_name,guest_phone ,guest_accompanying_members,guest_payment_amount,room_id,hotel_id,created_date,updated_date,is_Active) VALUES (?, ?, ?, ?,?,?,?,?,?)";
 		Connection con = null;
+		PreparedStatement pstmt = null;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Guest Name:");
+		String Guest_Name = sc.next();
+
+		System.out.println("Enter Guest Phone:");
+		String phone = sc.next();
+
+		System.out.println("How many guest accompanying members ?");
+		int accompanying_members = sc.nextInt();
+
+		System.out.println("Enter Guest bill amount:");
+		int amount = sc.nextInt();
+
+		System.out.println("Enter room type id:");
+		int room_type_id = sc.nextInt();
+
+		System.out.println("Enter hotel id:");
+		int hotel_id = sc.nextInt();
 
 		try {
-
 			Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-			// Registering drivers
 			DriverManager.registerDriver(driver);
-
-			// Reference to connection interface
+			boolean boolToAdd = true;
 			con = DriverManager.getConnection(url, user, pass);
-			Statement st = con.createStatement();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, Guest_Name);
+			pstmt.setString(2, phone);
+			pstmt.setInt(3, accompanying_members);
+			pstmt.setInt(4, amount);
+			pstmt.setInt(5, room_type_id);
+			pstmt.setInt(6, hotel_id);
+			pstmt.setDate(7, new Date(System.currentTimeMillis()));
+			pstmt.setDate(8, null);
+			pstmt.setBoolean(9, boolToAdd);
+			pstmt.executeUpdate();
 
-			// Executing query
-			int n = st.executeUpdate(sql);
-			if (n >1)
-				System.out.println("Inserted successfully : " + sql);
-			else
-				System.out.println("Inserting failed");
-
-			// Closing the connections
-			con.close();
+			System.out.println(" rows inserted successfully!");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
+	}
 
-		catch (Exception ex) {
-
-			System.err.println(ex);
-		}}}
 	public static void InsertIntoTable(int numOfRows) {
 
 		String sql = "INSERT INTO Guests (guest_name,guest_phone ,guest_accompanying_members,guest_payment_amount,room_id,hotel_id,created_date,updated_date,is_Active) VALUES (?, ?,?, ?, ?,?,?,?,?)";

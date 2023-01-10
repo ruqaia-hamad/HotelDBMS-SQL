@@ -16,10 +16,10 @@ public class Hotels {
 	static String pass = "root";
 
 	public static void creatingHotelsTable() {
-	
-		String sql = "CREATE TABLE Hotels " + "(id INTEGER PRIMARY KEY IDENTITY(1,1), " + " hotel_name VARCHAR(255) NOT NULL, "
-				+ " hotel_location VARCHAR(255), " + " created_date DATE NOT NULL, " + " updated_date DATE, "
-				+ " is_Active BIT NOT NULL)";
+
+		String sql = "CREATE TABLE Hotels " + "(id INTEGER PRIMARY KEY IDENTITY(1,1), "
+				+ " hotel_name VARCHAR(255) NOT NULL, " + " hotel_location VARCHAR(255), "
+				+ " created_date DATE NOT NULL, " + " updated_date DATE, " + " is_Active BIT NOT NULL)";
 
 		Connection con = null;
 
@@ -39,7 +39,6 @@ public class Hotels {
 				System.out.println("Created successfully : " + sql);
 			else
 				System.out.println("creating table failed");
-
 
 			con.close();
 		}
@@ -70,11 +69,10 @@ public class Hotels {
 				String stringToAdd = "Ruqaia" + numberToAdd;
 				boolean boolToAdd = true;
 
-		
 				pstmt.setString(1, stringToAdd);
 				pstmt.setString(2, stringToAdd);
 				pstmt.setDate(3, new Date(System.currentTimeMillis()));
-				pstmt.setDate(4,new Date(System.currentTimeMillis()));
+				pstmt.setDate(4, new Date(System.currentTimeMillis()));
 				pstmt.setBoolean(5, boolToAdd);
 				pstmt.executeUpdate();
 			}
@@ -262,47 +260,35 @@ public class Hotels {
 			}
 		}
 	}
-	public static void InsertIntoTable() {
-for(int i=0; i<=100;i++) {
-		String sql = "INSERT INTO Hotels (hotel_name, hotel_location, created_date, updated_date, is_Active)\r\n"
-				+ "VALUES ('Hilton', 'New York', '2022-01-01', '2022-01-01', 1),\r\n"
-			       +"('Marriott', 'Los Angeles', '2022-01-01', '2022-01-01', 1),\r\n"
-			      +" ('Sheraton', 'Chicago', '2022-01-01', '2022-01-01', 1),\r\n"
-			    +"('Hyatt', 'San Francisco', '2022-01-01', '2022-01-01', 1),\r\n"
-			     +" ('InterContinental', 'Miami', '2022-01-01', '2022-01-01', 1),\r\n"
-			    +" ('Ritz-Carlton', 'Boston', '2022-01-01', '2022-01-01', 1),\r\n"
-			     +  "('Four Seasons', 'Washington D.C.', '2022-01-01', '2022-01-01', 1),\r\n"
-			     +  "('W', 'Dallas', '2022-01-01', '2022-01-01', 1),"
-			      + "('Westin', 'Denver', '2022-01-01', '2022-01-01', 1),"
-			      + "('St. Regis', 'Seattle', '2022-01-01', '2022-01-01', 1)";
 
+	public static void InsertIntoTable() throws Throwable {
+
+		String sql = "INSERT INTO Hotels (hotel_name, hotel_location, created_date, updated_date, is_Active) VALUES (?, ?, ?, ?,?)";
 		Connection con = null;
+		PreparedStatement pstmt = null;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Hotel Name");
+		String Hotel_name = sc.next();
+		System.out.println("Enter Hotel Location");
+		String hotel_location = sc.next();
 
 		try {
-
 			Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-			// Registering drivers
 			DriverManager.registerDriver(driver);
-
-			// Reference to connection interface
+			boolean boolToAdd = true;
 			con = DriverManager.getConnection(url, user, pass);
-			Statement st = con.createStatement();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, Hotel_name);
+			pstmt.setString(2, hotel_location);
+			pstmt.setDate(3, new Date(System.currentTimeMillis()));
+			pstmt.setDate(4, null);
+			pstmt.setBoolean(4, boolToAdd);
+			pstmt.executeUpdate();
 
-			// Executing query
-			int m = st.executeUpdate(sql);
-			if (m >1)
-				System.out.println("Inserted successfully : " + sql);
-			else
-				System.out.println("Inserting failed");
-
-			// Closing the connections
-			con.close();
+			System.out.println(" rows inserted successfully!");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
-
-		catch (Exception ex) {
-
-			System.err.println(ex);
-		}}
 	}
-	
+
 }

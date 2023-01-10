@@ -17,8 +17,9 @@ public class EmployeeType {
 
 	public static void creatingEmployeeTypeTable() {
 
-		String sql = "CREATE TABLE Employee_Type " + "(id INTEGER PRIMARY KEY IDENTITY(1,1), " + "employee_type_name Varchar(225) NOT NULL, "
-				+ " created_date DATE NOT NULL, " + " updated_date DATE, " + "is_active BIT NOT NULL) ";
+		String sql = "CREATE TABLE Employee_Type " + "(id INTEGER PRIMARY KEY IDENTITY(1,1), "
+				+ "employee_type_name Varchar(225) NOT NULL, " + " created_date DATE NOT NULL, "
+				+ " updated_date DATE, " + "is_active BIT NOT NULL) ";
 
 		Connection con = null;
 
@@ -50,43 +51,32 @@ public class EmployeeType {
 		}
 	}
 
+	public static void InsertIntoTable() throws Throwable {
 
+		String sql = "INSERT INTO Employee_Type (employee_type_name,created_date,updated_date,is_Active) VALUES (?, ?, ?, ?)";
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Employee Name");
+		String employee_name = sc.next();
 
-		public static void InsertIntoTable() {
+		try {
+			Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+			DriverManager.registerDriver(driver);
+			boolean boolToAdd = true;
+			con = DriverManager.getConnection(url, user, pass);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, employee_name);
+			pstmt.setDate(2, new Date(System.currentTimeMillis()));
+			pstmt.setDate(3, null);
+			pstmt.setBoolean(4, boolToAdd);
+			pstmt.executeUpdate();
 
-			String sql = "INSERT INTO Employee_Type (employee_type_name,created_date,updated_date,is_Active)\r\n"
-					+ "VALUES ('MANAGER', '2022-01-01', '2022-01-01', 1),\r\n"
-					+ "       ('ATTENDANT', '2022-01-02', '2022-01-02', 1),\r\n"
-					+ "       ('VALET', '2022-01-03', '2022-01-03', 1),\r\n"
-					+ "       ('BUTLER', '2022-01-04', '2022-01-04', 1),\r\n"
-					+ "       ('DIRECTOR', '2022-01-05', '2022-01-05', 1)";
-			Connection con = null;
-
-			try {
-
-				Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-				// Registering drivers
-				DriverManager.registerDriver(driver);
-
-				// Reference to connection interface
-				con = DriverManager.getConnection(url, user, pass);
-				Statement st = con.createStatement();
-
-				// Executing query
-				int m = st.executeUpdate(sql);
-				if (m >1)
-					System.out.println("Inserted successfully : " + sql);
-				else
-					System.out.println("Inserting failed");
-
-				// Closing the connections
-				con.close();
-			}
-
-			catch (Exception ex) {
-
-				System.out.println(ex);
-			}}
+			System.out.println(" rows inserted successfully!");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 
 	public static void readFromTable(int numOfRows) {
 

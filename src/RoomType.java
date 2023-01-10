@@ -50,39 +50,32 @@ public class RoomType {
 		}
 	}
 
-	public static void InsertIntoTable() {
 
-		String sql = "INSERT INTO Room_Type (room_type_name, created_date, updated_date, is_Active)\r\n"
-				+ "VALUES ('STANDARD', '2022-01-01', '2022-01-01', 1),\r\n"
-				+ "       ('DELUXE', '2022-01-02', '2022-01-02', 1),\r\n"
-				+ "       ('DELUXE', '2022-01-02', '2022-01-02', 1),\r\n"
-				+ "       ('SUITE', '2022-01-03', '2022-01-03', 1);";
+	public static void InsertIntoTable() throws Throwable {
+
+		String sql = "INSERT INTO Room_Type(room_type_name, created_date, updated_date, is_Active) VALUES (?, ?, ?, ?)";
 		Connection con = null;
+		PreparedStatement pstmt = null;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter room type you want: "+"DELUXE" +" or " +"STANDARD"+" or "+"SUITE");
+		String room_type_Name = sc.next();
 
+	
 		try {
-
 			Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-			// Registering drivers
 			DriverManager.registerDriver(driver);
-
-			// Reference to connection interface
+			boolean boolToAdd = true;
 			con = DriverManager.getConnection(url, user, pass);
-			Statement st = con.createStatement();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,room_type_Name);
+			pstmt.setDate(2, new Date(System.currentTimeMillis()));
+			pstmt.setDate(3,null);
+			pstmt.setBoolean(4, boolToAdd);
+			pstmt.executeUpdate();
 
-			// Executing query
-			int m = st.executeUpdate(sql);
-			if (m > 1)
-				System.out.println("Inserted successfully : " + sql);
-			else
-				System.out.println("Inserting failed");
-
-			// Closing the connections
-			con.close();
-		}
-
-		catch (Exception ex) {
-
-			System.err.println(ex);
+			System.out.println(" rows inserted successfully!");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 	}
 

@@ -35,7 +35,8 @@ public class Main {
 					System.out.println("|  [4]Print 10 hotels                          |");
 					System.out.println("|  [5]Make first 10 hotels 'is_Active' = false |");
 					System.out.println("|  [6]Print hotel information by user input    |");
-					System.out.println("|  [7]EXIT                                     |");
+					System.out.println("|  [7]Insert New Hotel                         |");
+					System.out.println("|  [8]EXIT                                     |");
 					System.out.println(" ==============================================");
 					int op = sc.nextInt();
 
@@ -64,6 +65,9 @@ public class Main {
 						Hotels.readFromTable(numOfRows);
 						break;
 					case 7:
+						Hotels.InsertIntoTable();
+						break;
+					case 8:
 						isExitMenu = false;
 
 						break;
