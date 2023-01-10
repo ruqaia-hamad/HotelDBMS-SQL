@@ -46,7 +46,7 @@ public class EmployeeType {
 
 		catch (Exception ex) {
 
-			System.err.println(ex);
+			System.out.println(ex);
 		}
 	}
 
@@ -85,7 +85,7 @@ public class EmployeeType {
 
 			catch (Exception ex) {
 
-				System.err.println(ex);
+				System.out.println(ex);
 			}}
 
 	public static void readFromTable(int numOfRows) {

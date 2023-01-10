@@ -83,7 +83,6 @@ public class Main {
 					System.out.println(" ==============================================");
 					System.out.println("|  [1]CREATE ROOMS   TABLE                     |");
 					System.out.println("|  [2]Insert  ROOM                             |");
-
 					System.out.println("|  [3]Print 10 ROOMS                           |");
 					System.out.println("|  [4]Make first 10 ROOMS  'is_Active' = false |");
 					System.out.println("|  [5]Print ROOMS information by user input    |");
@@ -96,14 +95,15 @@ public class Main {
 						Rooms.creatingRoomsTable();
 						break;
 					case 2:
-						Rooms.InsertIntoTable();
+						Rooms.newInsert();
 						break;
 
 					case 3:
 						Rooms.readFromTable(10);
 						break;
 					case 4:
-						Rooms.makeIsActiveFalseById(12);
+						Rooms.makeIsActiveFalseById(10);
+						Rooms.newInsert();
 						break;
 
 					case 5:
@@ -138,9 +138,7 @@ public class Main {
 					switch (op) {
 					case 1:
 						Guests.creatingGuestsTable();
-
 						break;
-
 					case 2:
 
 						Guests.InsertIntoTable();
@@ -151,7 +149,6 @@ public class Main {
 					case 4:
 						Guests.makeIsActiveFalseById(12);
 						break;
-
 					case 5:
 						System.out.print("Enter the number of Guests information you want ");
 						int numOfRows = sc.nextInt();
@@ -172,7 +169,6 @@ public class Main {
 					System.out.println(" ==============================================");
 					System.out.println("|  [1]CREATE Employees TABLE                      |");
 					System.out.println("|  [2]Insert        Employees                     |");
-
 					System.out.println("|  [4]Print 10 Employees                          |");
 					System.out.println("|  [5]Make first 10 Employees 'is_Active' = false |");
 					System.out.println("|  [6]Print Employees information by user input   |");
@@ -227,11 +223,8 @@ public class Main {
 					switch (op) {
 					case 1:
 						EmployeeType.creatingEmployeeTypeTable();
-
 						break;
-
 					case 2:
-
 						EmployeeType.InsertIntoTable();
 						break;
 					case 3:
@@ -240,7 +233,6 @@ public class Main {
 					case 4:
 						EmployeeType.makeIsActiveFalseById(10);
 						break;
-
 					case 5:
 						System.out.print("Enter the number of Employee type information you want ");
 						int numOfRows = sc.nextInt();
@@ -315,11 +307,8 @@ public class Main {
 					switch (op) {
 					case 1:
 						HotelManagement.checkGuestNameEdingWithE();
-
 						break;
-
 					case 2:
-
 						HotelManagement.roomPaying();
 						break;
 					case 3:
@@ -335,11 +324,9 @@ public class Main {
 						HotelManagement.roomTypeName();
 						break;
 					case 7:
-
 						isExitMenu9 = false;
 						break;
 					}
-
 				}
 				isExitMenu3 = true;
 				break;

@@ -189,7 +189,6 @@ public class Guests {
 			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-
 				String guestName = rs.getString("guest_name");
 				Integer guestPhone = rs.getInt("guest_phone");
 				Integer accompanyingMembers = rs.getInt("guest_accompanying_members");

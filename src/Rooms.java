@@ -54,10 +54,9 @@ public class Rooms {
 
 	public static void InsertIntoTable() {
 
-		String sql = "INSERT INTO Room_Type (room_type_id,hotel_id , created_date, updated_date, is_Active)\r\n"
+		String sql = "INSERT INTO Rooms(room_type_id,hotel_id , created_date, updated_date, is_Active)\r\n"
 				+ "VALUES (1, 1,'2022-01-01', '2022-01-01', 1),\r\n"
-				+ "       (2,2, '2022-01-02', '2022-01-02', 1),\r\n"
-				+ "       (3,3 ,'2022-01-03', '2022-01-03', 1);";
+				+ "       (2,2, '2022-01-02', '2022-01-02', 1),\r\n" + "       (3,3 ,'2022-01-03', '2022-01-03', 1);";
 		Connection con = null;
 
 		try {
@@ -72,7 +71,7 @@ public class Rooms {
 
 			// Executing query
 			int m = st.executeUpdate(sql);
-			if (m >1)
+			if (m > 1)
 				System.out.println("Inserted successfully : " + sql);
 			else
 				System.out.println("Inserting failed");
@@ -84,8 +83,8 @@ public class Rooms {
 		catch (Exception ex) {
 
 			System.err.println(ex);
-		}}
-
+		}
+	}
 
 	public static void readFromTable(int numOfRows) {
 
@@ -264,15 +263,35 @@ public class Rooms {
 			}
 		}
 	}
-	
-	
-	//-------------------------------------------
-	
-	
 
+	public static void newInsert() throws Throwable {
+
+		String sql = "INSERT INTO Rooms (room_type_id, hotel_id, created_date, updated_date, is_Active) VALUES (?, ?, ?, ?, ?)";
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter room type id:");
+		int room_type_id = sc.nextInt();
+
+		System.out.println("Enter hotel id:");
+		int hotel_id = sc.nextInt();
+		try {
+			Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+			DriverManager.registerDriver(driver);
+			boolean boolToAdd = true;
+			con = DriverManager.getConnection(url, user, pass);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, room_type_id);
+			pstmt.setInt(2, hotel_id);
+			pstmt.setDate(3, new Date(System.currentTimeMillis()));
+			pstmt.setDate(4,null);
+			pstmt.setBoolean(5, boolToAdd);
+			pstmt.executeUpdate();
+
+			System.out.println(" rows inserted successfully!");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 
 }
-
-
-
-

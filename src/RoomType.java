@@ -16,10 +16,10 @@ public class RoomType {
 	static String pass = "root";
 
 	public static void creatingRoomTypeTable() {
-	
-		
-		String sql ="CREATE TABLE Room_Type " + "(id INTEGER PRIMARY KEY IDENTITY(1,1), " + " room_type_name VARCHAR(255) NOT NULL, "
-				+ " created_date DATE, " + " updated_date DATE, " + " is_Active BIT NOT NULL)";
+
+		String sql = "CREATE TABLE Room_Type " + "(id INTEGER PRIMARY KEY IDENTITY(1,1), "
+				+ " room_type_name VARCHAR(255) NOT NULL, " + " created_date DATE, " + " updated_date DATE, "
+				+ " is_Active BIT NOT NULL)";
 
 		Connection con = null;
 
@@ -71,7 +71,7 @@ public class RoomType {
 
 			// Executing query
 			int m = st.executeUpdate(sql);
-			if (m >1)
+			if (m > 1)
 				System.out.println("Inserted successfully : " + sql);
 			else
 				System.out.println("Inserting failed");
@@ -83,8 +83,8 @@ public class RoomType {
 		catch (Exception ex) {
 
 			System.err.println(ex);
-		}}
-
+		}
+	}
 
 	public static void readFromTable(int numOfRows) {
 
